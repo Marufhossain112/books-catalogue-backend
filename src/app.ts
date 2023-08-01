@@ -1,4 +1,4 @@
-import express, { Application, NextFunction, Response, Request } from 'express'
+import express, { Application, Response, Request } from 'express'
 import cors from 'cors'
 
 const app: Application = express()
@@ -10,7 +10,7 @@ app.use(express.urlencoded({ extended: true }))
 
 // Application routes
 
-app.get('/', (req: Request, res: Response, next: NextFunction) => {
+app.get('/', (req: Request, res: Response) => {
   res.send('Hello World!')
   // console.log("Hello");
 })
