@@ -43,8 +43,15 @@ const refreshToken = catchAsync(async (req: Request, res: Response) => {
     message: 'Loggedin  successfully',
   })
 })
+const logout = async (req: Request, res: Response) => {
+  res.cookie('cookie', '', {
+    expires: new Date(Date.now()),
+  })
+  return res.status(200).json({ message: 'User Logout Successfully' })
+}
 
 export const AuthController = {
   loginUser,
   refreshToken,
+  logout,
 }

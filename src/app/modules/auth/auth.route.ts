@@ -8,10 +8,11 @@ router.post(
   '/login',
   validateRequest(AuthValidation.loginZodSchema),
   AuthController.loginUser,
-)
-router.post(
-  '/refresh-token',
-  validateRequest(AuthValidation.refreshTokenZodSchema),
-  AuthController.refreshToken,
-)
+),
+  router.post('/logout', AuthController.logout),
+  router.post(
+    '/refresh-token',
+    validateRequest(AuthValidation.refreshTokenZodSchema),
+    AuthController.refreshToken,
+  )
 export const AuthRoutes = router
