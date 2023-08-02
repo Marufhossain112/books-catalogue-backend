@@ -6,6 +6,7 @@ export type IBook = {
   author: string
   genre: string
   publicationYear: string
+  reviews?: string[]
 }
 export type IBookFilters = {
   searchTerm?: string

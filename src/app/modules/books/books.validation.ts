@@ -7,6 +7,7 @@ const createBooksZodSchema = z.object({
     publicationYear: z.string({
       required_error: 'Publication year is required',
     }),
+    reviews: z.string().array().optional(),
   }),
 })
 const updateBooksZodSchema = z.object({
@@ -19,6 +20,7 @@ const updateBooksZodSchema = z.object({
         required_error: 'Publication year is required',
       })
       .optional(),
+    reviews: z.string().array().optional(),
   }),
 })
 
