@@ -5,11 +5,11 @@ export type IBook = {
   title: string
   author: string
   genre: string
-  publicationDate: string
+  publicationYear: string
 }
 
 export type BookModel = {
   isBookExist(
     id: string,
-  ): Promise<Pick<IBook, 'title' | 'author' | 'genre' | 'publicationDate'>>
+  ): Promise<Pick<IBook, 'title' | 'author' | 'genre' | 'publicationYear'>>
 } & Model<IBook>

@@ -21,7 +21,7 @@ const bookSchema = new Schema<IBook, BookModel>(
       type: String,
       required: true,
     },
-    publicationDate: {
+    publicationYear: {
       type: String,
       required: true,
     },
@@ -38,11 +38,11 @@ bookSchema.statics.isBookExist = async function (
   id: string,
 ): Promise<Pick<
   IBook,
-  'title' | 'author' | 'genre' | 'publicationDate'
+  'title' | 'author' | 'genre' | 'publicationYear'
 > | null> {
   return await Book.findOne(
     { id },
-    { title: 1, author: 1, genre: 1, publicationDate: 1 },
+    { title: 1, author: 1, genre: 1, publicationYear: 1 },
   )
 }
 

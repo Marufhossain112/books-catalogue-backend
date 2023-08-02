@@ -9,5 +9,6 @@ router.post(
   validateRequest(BookValidation.booksZodSchema),
   BookController.newBook,
 )
+router.get('/all-books', BookController.newBook)
 
 export const BooksRoutes = router
