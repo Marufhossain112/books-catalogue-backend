@@ -59,7 +59,10 @@ const getAllBooks = async (
   }
   const whereConditions =
     andConditions.length > 0 ? { $and: andConditions } : {}
-  const result = await Book.find({}).sort(sortItems).skip(skip).limit(limit)
+  const result = await Book.find(whereConditions)
+    .sort(sortItems)
+    .skip(skip)
+    .limit(limit)
   const total = await Book.countDocuments(whereConditions)
   return {
     meta: {
