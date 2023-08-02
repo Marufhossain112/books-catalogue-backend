@@ -1,5 +1,5 @@
 import { z } from 'zod'
-const booksZodSchema = z.object({
+const createBooksZodSchema = z.object({
   body: z.object({
     title: z.string({ required_error: 'Title is required' }),
     author: z.string({ required_error: 'Author is required' }),
@@ -9,7 +9,20 @@ const booksZodSchema = z.object({
     }),
   }),
 })
+const updateBooksZodSchema = z.object({
+  body: z.object({
+    title: z.string({ required_error: 'Title is required' }).optional(),
+    author: z.string({ required_error: 'Author is required' }).optional(),
+    genre: z.string({ required_error: 'Genre is required' }).optional(),
+    publicationYear: z
+      .string({
+        required_error: 'Publication year is required',
+      })
+      .optional(),
+  }),
+})
 
 export const BookValidation = {
-  booksZodSchema,
+  createBooksZodSchema,
+  updateBooksZodSchema,
 }

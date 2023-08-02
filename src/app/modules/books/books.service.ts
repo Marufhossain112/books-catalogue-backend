@@ -83,14 +83,15 @@ const editBook = async (
   id: string,
   payload: Partial<IBook>,
 ): Promise<IBook | null> => {
-  const isExist = await Book.findOne({ id })
+  const isExist = await Book.findOne({ _id: id })
+  // console.log('boi paiso mama', isExist)
   if (!isExist) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Book not found.')
   }
   const { ...bookData } = payload
   const editedBookData: Partial<IBook> = { ...bookData }
 
-  const result = await Book.findOneAndUpdate({ id }, editedBookData, {
+  const result = await Book.findOneAndUpdate({ _id: id }, editedBookData, {
     new: true,
   })
   return result

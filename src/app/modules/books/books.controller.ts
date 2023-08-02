@@ -44,9 +44,22 @@ const getSingleBook = catchAsync(async (req: Request, res: Response) => {
     data: result,
   })
 })
+// edit book
+const editBook = catchAsync(async (req: Request, res: Response) => {
+  const id = req.params.id
+  const editedData = req.body
+  const result = await BookService.editBook(id, editedData)
+  sendResponse<IBook>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Book edited successfully',
+    data: result,
+  })
+})
 
 export const BookController = {
   newBook,
   getAllBooks,
   getSingleBook,
+  editBook,
 }
