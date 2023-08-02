@@ -7,8 +7,7 @@ import pick from '../../../shared/pick'
 import { BookFilterableFields } from './books.constants'
 import { paginationFields } from '../../../constants/paginationFields'
 import { IBook } from './books.interface'
-import { Book } from './books.model'
-import ApiError from '../../../errors/ApiError'
+
 // add new book
 const newBook = catchAsync(async (req: Request, res: Response) => {
   const { ...data } = req.body
@@ -45,26 +44,9 @@ const getSingleBook = catchAsync(async (req: Request, res: Response) => {
     data: result,
   })
 })
-// edit book
-const editBook = async (
-  id: string,
-  payload: Partial<IBook>,
-): Promise<IBook | null> => {
-  const isExist = await Book.findOne({ id })
-  if (!isExist) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Book not found.')
-  }
-  const { ...bookData } = payload
-  const editedBookData: Partial<IBook> = { ...bookData }
 
-  const result = await Book.findOneAndUpdate({ id }, editedBookData, {
-    new: true,
-  })
-  return result
-}
 export const BookController = {
   newBook,
   getAllBooks,
   getSingleBook,
-  editBook,
 }
