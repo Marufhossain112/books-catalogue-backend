@@ -96,9 +96,15 @@ const editBook = async (
   })
   return result
 }
+// delete book
+const deleteBook = async (id: string): Promise<IBook | null> => {
+  const result = await Book.findByIdAndDelete({ _id: id })
+  return result
+}
 export const BookService = {
   newBook,
   getAllBooks,
   getSingleBook,
   editBook,
+  deleteBook,
 }

@@ -16,4 +16,5 @@ router.patch(
   validateRequest(BookValidation.updateBooksZodSchema),
   BookController.editBook,
 )
+router.delete('/:id', BookController.deleteBook)
 export const BooksRoutes = router
