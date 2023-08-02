@@ -1,9 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import httpStatus from 'http-status'
 import ApiError from '../../../errors/ApiError'
-import { IBook } from './books.interface'
+import { IBook, IBookFilters } from './books.interface'
 import { Book } from './books.model'
 import { generateBookId } from './books.utils'
+import { IPaginationOptions } from '../../../interfaces/pagination'
+import { IGenericResponse } from '../../../interfaces/common'
+import { BookSearchableFields } from './books.constants'
+import { paginationHelpers } from '../../../helpers/paginationHelpers'
+import { SortOrder } from 'mongoose'
 
 // add new books
 const newBook = async (book: IBook) => {
@@ -21,8 +26,50 @@ const newBook = async (book: IBook) => {
   }
 }
 // getAllBooks
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const getAllBooks = async (param1: any, param2: any) => {}
+const getAllBooks = async (
+  filters: IBookFilters,
+  paginationOptions: IPaginationOptions,
+): Promise<IGenericResponse<IBook[]>> => {
+  const { searchTerm, ...filtersData } = filters
+  const andConditions = []
+  if (searchTerm) {
+    andConditions.push({
+      $or: BookSearchableFields.map(field => ({
+        [field]: {
+          $regex: searchTerm,
+          $options: 'i',
+        },
+      })),
+    })
+  }
+  // console.log('filtersData key', Object.entries(filtersData));
+  if (Object.keys(filtersData).length) {
+    andConditions.push({
+      $and: Object.entries(filtersData).map(([field, value]) => ({
+        [field]: value,
+      })),
+    })
+  }
+
+  const { page, limit, skip, sortBy, sortOrder } =
+    paginationHelpers.calculatePagination(paginationOptions)
+  const sortItems: { [key: string]: SortOrder } = {}
+  if (sortBy && sortOrder) {
+    sortItems[sortBy] = sortOrder
+  }
+  const whereConditions =
+    andConditions.length > 0 ? { $and: andConditions } : {}
+  const result = await Book.find({}).sort(sortItems).skip(skip).limit(limit)
+  const total = await Book.countDocuments(whereConditions)
+  return {
+    meta: {
+      page,
+      limit,
+      total,
+    },
+    data: result,
+  }
+}
 export const BookService = {
   newBook,
   getAllBooks,

@@ -7,6 +7,11 @@ export type IBook = {
   genre: string
   publicationYear: string
 }
+export type IBookFilters = {
+  searchTerm?: string
+  genre?: string
+  publicationYear?: string
+}
 
 export type BookModel = {
   isBookExist(

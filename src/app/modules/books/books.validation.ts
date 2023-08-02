@@ -5,7 +5,7 @@ const booksZodSchema = z.object({
     author: z.string({ required_error: 'Author is required' }),
     genre: z.string({ required_error: 'Genre is required' }),
     publicationYear: z.string({
-      required_error: 'Publication date is required',
+      required_error: 'Publication year is required',
     }),
   }),
 })
