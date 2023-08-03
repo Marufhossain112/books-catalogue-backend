@@ -7,9 +7,7 @@ import { ReviewService } from './review.service'
 // add review
 const addReview = catchAsync(async (req: Request, res: Response) => {
   const { ...reviewData } = req.body
-  const result = await (
-    await ReviewService.addReview(reviewData)
-  ).populate('book')
+  const result = await ReviewService.addReview(reviewData)
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,

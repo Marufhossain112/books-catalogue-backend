@@ -1,5 +1,6 @@
 import { Schema, model } from 'mongoose'
 import { BookModel, IBook } from './books.interface'
+import { reviewSchema } from '../reviews/review.model'
 
 // And a schema that knows about IUserMethods
 const bookSchema = new Schema<IBook, BookModel>(
@@ -25,9 +26,7 @@ const bookSchema = new Schema<IBook, BookModel>(
       type: String,
       required: true,
     },
-    reviews: {
-      type: [String],
-    },
+    reviews: [reviewSchema],
   },
   {
     timestamps: true,
