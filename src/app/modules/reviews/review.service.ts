@@ -17,8 +17,7 @@ const addReview = async (payload: IReview) => {
       author,
     })
     const bookToUpdate = await Book.findById(book)
-    console.log('gotthebook', bookToUpdate)
-    console.log('new review', newReview)
+
     bookToUpdate?.reviews?.push(newReview)
     await bookToUpdate!.save()
     return newReview
