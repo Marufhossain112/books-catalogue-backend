@@ -59,10 +59,59 @@ const getAllBooks = async (
   }
   const whereConditions =
     andConditions.length > 0 ? { $and: andConditions } : {}
+  const allBooks = await Book.find({})
   const result = await Book.find(whereConditions)
     .sort(sortItems)
     .skip(skip)
-    .limit(limit)
+    .limit(allBooks.length)
+  const total = await Book.countDocuments(whereConditions)
+  return {
+    meta: {
+      page,
+      limit,
+      total,
+    },
+    data: result,
+  }
+}
+// get latest books
+const getLatestBooks = async (
+  filters: IBookFilters,
+  paginationOptions: IPaginationOptions,
+): Promise<IGenericResponse<IBook[]>> => {
+  const { searchTerm, ...filtersData } = filters
+  const andConditions = []
+  if (searchTerm) {
+    andConditions.push({
+      $or: BookSearchableFields.map(field => ({
+        [field]: {
+          $regex: searchTerm,
+          $options: 'i',
+        },
+      })),
+    })
+  }
+  // console.log('filtersData key', Object.entries(filtersData));
+  if (Object.keys(filtersData).length) {
+    andConditions.push({
+      $and: Object.entries(filtersData).map(([field, value]) => ({
+        [field]: value,
+      })),
+    })
+  }
+
+  const { page, limit, skip, sortBy, sortOrder } =
+    paginationHelpers.calculatePagination(paginationOptions)
+  const sortItems: { [key: string]: SortOrder } = {}
+  if (sortBy && sortOrder) {
+    sortItems[sortBy] = sortOrder
+  }
+  const whereConditions =
+    andConditions.length > 0 ? { $and: andConditions } : {}
+  const result = await Book.find(whereConditions)
+    .sort(sortItems)
+    .skip(skip)
+    .limit(10)
   const total = await Book.countDocuments(whereConditions)
   return {
     meta: {
@@ -104,6 +153,7 @@ const deleteBook = async (id: string): Promise<IBook | null> => {
 export const BookService = {
   newBook,
   getAllBooks,
+  getLatestBooks,
   getSingleBook,
   editBook,
   deleteBook,

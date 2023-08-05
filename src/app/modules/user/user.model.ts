@@ -31,9 +31,7 @@ const userSchema = new Schema<IUser, UserModel>(
         },
       },
     },
-    dateOfBirth: {
-      type: String,
-    },
+
     gender: {
       type: String,
       enum: gender,

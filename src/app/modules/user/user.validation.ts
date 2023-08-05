@@ -19,9 +19,7 @@ const signUpUserZodSchema = z.object({
     gender: z.enum([...gender] as [string, ...string[]], {
       required_error: 'Gender is required.',
     }),
-    dateOfBirth: z.string({
-      required_error: 'Date of birth is required.',
-    }),
+
     bloodGroup: z.enum([...bloodGroup] as [string, ...string[]]).optional(),
     email: z.string({ required_error: 'Email is required' }),
     contactNo: z
