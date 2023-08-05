@@ -43,9 +43,6 @@ const userSchema = new mongoose_1.Schema({
             },
         },
     },
-    dateOfBirth: {
-        type: String,
-    },
     gender: {
         type: String,
         enum: common_1.gender,

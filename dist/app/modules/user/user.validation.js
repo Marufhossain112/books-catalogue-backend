@@ -22,9 +22,6 @@ const signUpUserZodSchema = zod_1.z.object({
         gender: zod_1.z.enum([...common_1.gender], {
             required_error: 'Gender is required.',
         }),
-        dateOfBirth: zod_1.z.string({
-            required_error: 'Date of birth is required.',
-        }),
         bloodGroup: zod_1.z.enum([...common_1.bloodGroup]).optional(),
         email: zod_1.z.string({ required_error: 'Email is required' }),
         contactNo: zod_1.z

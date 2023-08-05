@@ -1,11 +1,7 @@
 import { Model } from 'mongoose'
-export type Username = {
-  firstName: string
-  middleName: string
-  lastName: string
-}
+
 export type IUser = {
-  name: Username
+  name: string
   email: string
   password: string
   gender: 'male' | 'female'

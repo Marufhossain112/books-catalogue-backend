@@ -56,6 +56,20 @@ const getAllBooks = (0, catchAsynch_1.default)((req, res) => __awaiter(void 0, v
         data: result.data,
     });
 }));
+// get latest books
+const getLatestBooks = (0, catchAsynch_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const filters = (0, pick_1.default)(req.query, books_constants_1.BookFilterableFields);
+    // eslint-disable-next-line no-console
+    console.log('filters', filters);
+    const paginationOptions = (0, pick_1.default)(req.query, paginationFields_1.paginationFields);
+    const result = yield books_service_1.BookService.getLatestBooks(filters, paginationOptions);
+    (0, sendResponse_1.default)(res, {
+        statusCode: http_status_1.default.OK,
+        success: true,
+        message: 'Books retrieved successfully',
+        data: result.data,
+    });
+}));
 // get single book
 const getSingleBook = (0, catchAsynch_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const id = req.params.id;
@@ -92,6 +106,7 @@ const deleteBook = (0, catchAsynch_1.default)((req, res) => __awaiter(void 0, vo
 }));
 exports.BookController = {
     newBook,
+    getLatestBooks,
     getAllBooks,
     getSingleBook,
     editBook,

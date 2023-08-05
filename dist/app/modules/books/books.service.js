@@ -75,10 +75,53 @@ const getAllBooks = (filters, paginationOptions) => __awaiter(void 0, void 0, vo
         sortItems[sortBy] = sortOrder;
     }
     const whereConditions = andConditions.length > 0 ? { $and: andConditions } : {};
+    const allBooks = yield books_model_1.Book.find({});
     const result = yield books_model_1.Book.find(whereConditions)
         .sort(sortItems)
         .skip(skip)
-        .limit(limit);
+        .limit(allBooks.length);
+    const total = yield books_model_1.Book.countDocuments(whereConditions);
+    return {
+        meta: {
+            page,
+            limit,
+            total,
+        },
+        data: result,
+    };
+});
+// get latest books
+const getLatestBooks = (filters, paginationOptions) => __awaiter(void 0, void 0, void 0, function* () {
+    const { searchTerm } = filters, filtersData = __rest(filters, ["searchTerm"]);
+    const andConditions = [];
+    if (searchTerm) {
+        andConditions.push({
+            $or: books_constants_1.BookSearchableFields.map(field => ({
+                [field]: {
+                    $regex: searchTerm,
+                    $options: 'i',
+                },
+            })),
+        });
+    }
+    // console.log('filtersData key', Object.entries(filtersData));
+    if (Object.keys(filtersData).length) {
+        andConditions.push({
+            $and: Object.entries(filtersData).map(([field, value]) => ({
+                [field]: value,
+            })),
+        });
+    }
+    const { page, limit, skip, sortBy, sortOrder } = paginationHelpers_1.paginationHelpers.calculatePagination(paginationOptions);
+    const sortItems = {};
+    if (sortBy && sortOrder) {
+        sortItems[sortBy] = sortOrder;
+    }
+    const whereConditions = andConditions.length > 0 ? { $and: andConditions } : {};
+    const result = yield books_model_1.Book.find(whereConditions)
+        .sort(sortItems)
+        .skip(skip)
+        .limit(10);
     const total = yield books_model_1.Book.countDocuments(whereConditions);
     return {
         meta: {
@@ -116,6 +159,7 @@ const deleteBook = (id) => __awaiter(void 0, void 0, void 0, function* () {
 exports.BookService = {
     newBook,
     getAllBooks,
+    getLatestBooks,
     getSingleBook,
     editBook,
     deleteBook,

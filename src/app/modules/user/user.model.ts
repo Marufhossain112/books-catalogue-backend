@@ -7,6 +7,10 @@ import { bloodGroup, gender } from '../../../shared/common'
 // And a schema that knows about IUserMethods
 const userSchema = new Schema<IUser, UserModel>(
   {
+    name: {
+      type: String,
+      required: true,
+    },
     email: {
       type: String,
       required: true,
@@ -15,21 +19,6 @@ const userSchema = new Schema<IUser, UserModel>(
     password: {
       type: String,
       required: true,
-    },
-    name: {
-      type: {
-        firstName: {
-          type: String,
-          required: true,
-        },
-        middleName: {
-          type: String,
-        },
-        lastName: {
-          type: String,
-          required: true,
-        },
-      },
     },
 
     gender: {
@@ -40,7 +29,6 @@ const userSchema = new Schema<IUser, UserModel>(
       type: String,
       enum: bloodGroup,
     },
-
     presentAddress: {
       type: String,
       required: true,
