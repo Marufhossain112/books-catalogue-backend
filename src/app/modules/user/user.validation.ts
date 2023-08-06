@@ -11,11 +11,9 @@ const signUpUserZodSchema = z.object({
     }),
     bloodGroup: z.enum([...bloodGroup] as [string, ...string[]]).optional(),
     email: z.string({ required_error: 'Email is required' }),
-    contactNo: z
-      .string({
-        required_error: 'Contact number is required.',
-      })
-      .optional(),
+    contactNo: z.string({
+      required_error: 'Contact number is required.',
+    }),
     presentAddress: z.string({
       required_error: 'Present address is required.',
     }),

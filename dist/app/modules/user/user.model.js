@@ -19,6 +19,10 @@ const config_1 = __importDefault(require("../../../config"));
 const common_1 = require("../../../shared/common");
 // And a schema that knows about IUserMethods
 const userSchema = new mongoose_1.Schema({
+    name: {
+        type: String,
+        required: true,
+    },
     email: {
         type: String,
         required: true,
@@ -27,21 +31,6 @@ const userSchema = new mongoose_1.Schema({
     password: {
         type: String,
         required: true,
-    },
-    name: {
-        type: {
-            firstName: {
-                type: String,
-                required: true,
-            },
-            middleName: {
-                type: String,
-            },
-            lastName: {
-                type: String,
-                required: true,
-            },
-        },
     },
     gender: {
         type: String,

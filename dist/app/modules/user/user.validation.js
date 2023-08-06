@@ -6,18 +6,8 @@ const common_1 = require("../../../shared/common");
 const signUpUserZodSchema = zod_1.z.object({
     body: zod_1.z.object({
         password: zod_1.z.string(),
-        name: zod_1.z.object({
-            firstName: zod_1.z.string({
-                required_error: 'First name is required',
-            }),
-            middleName: zod_1.z
-                .string({
-                required_error: 'Middle name is required',
-            })
-                .optional(),
-            lastName: zod_1.z.string({
-                required_error: 'Last name is required',
-            }),
+        name: zod_1.z.string({
+            required_error: 'Name is required.',
         }),
         gender: zod_1.z.enum([...common_1.gender], {
             required_error: 'Gender is required.',
