@@ -33,20 +33,20 @@ const getAllBooks = catchAsync(async (req: Request, res: Response) => {
     data: result.data,
   })
 })
-// get latest books
-const getLatestBooks = catchAsync(async (req: Request, res: Response) => {
-  const filters = pick(req.query, BookFilterableFields)
-  // eslint-disable-next-line no-console
-  console.log('filters', filters)
-  const paginationOptions = pick(req.query, paginationFields)
-  const result = await BookService.getLatestBooks(filters, paginationOptions)
-  sendResponse<IBook[]>(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: 'Books retrieved successfully',
-    data: result.data,
-  })
-})
+// // get latest books
+// const getLatestBooks = catchAsync(async (req: Request, res: Response) => {
+//   const filters = pick(req.query, BookFilterableFields)
+//   // eslint-disable-next-line no-console
+//   console.log('filters', filters)
+//   const paginationOptions = pick(req.query, paginationFields)
+//   const result = await BookService.getLatestBooks(filters, paginationOptions)
+//   sendResponse<IBook[]>(res, {
+//     statusCode: httpStatus.OK,
+//     success: true,
+//     message: 'Books retrieved successfully',
+//     data: result.data,
+//   })
+// })
 // get single book
 const getSingleBook = catchAsync(async (req: Request, res: Response) => {
   const id = req.params.id
@@ -85,7 +85,7 @@ const deleteBook = catchAsync(async (req: Request, res: Response) => {
 
 export const BookController = {
   newBook,
-  getLatestBooks,
+  // getLatestBooks,
   getAllBooks,
   getSingleBook,
   editBook,

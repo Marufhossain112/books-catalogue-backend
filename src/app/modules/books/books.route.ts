@@ -10,7 +10,7 @@ router.post(
   BookController.newBook,
 )
 router.get('/all-books', BookController.getAllBooks)
-router.get('/latest-books', BookController.getLatestBooks)
+// router.get('/latest-books', BookController.getLatestBooks)
 router.get('/:id', BookController.getSingleBook)
 router.patch(
   '/:id',
