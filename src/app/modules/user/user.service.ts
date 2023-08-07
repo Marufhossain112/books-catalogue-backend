@@ -15,7 +15,7 @@ const signupUser = async (user: IUser) => {
     const newUser = await User.create(user)
     return newUser
   } else {
-    throw new ApiError(httpStatus.NOT_ACCEPTABLE, 'User exist')
+    throw new ApiError(httpStatus.NOT_ACCEPTABLE, 'User already exist')
   }
 }
 
