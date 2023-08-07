@@ -7,6 +7,7 @@ export type IBook = {
   author: string
   genre: string
   publicationYear: string
+  imgUrl?: string
   reviews?: IReview[]
 }
 export type IBookFilters = {

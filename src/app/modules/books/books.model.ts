@@ -26,6 +26,9 @@ const bookSchema = new Schema<IBook, BookModel>(
       type: String,
       required: true,
     },
+    imgUrl: {
+      type: String,
+    },
     reviews: [reviewSchema],
   },
   {
