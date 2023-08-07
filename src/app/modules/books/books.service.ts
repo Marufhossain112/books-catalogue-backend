@@ -53,6 +53,7 @@ const getAllBooks = async (
 
   const { page, limit, skip, sortBy, sortOrder } =
     paginationHelpers.calculatePagination(paginationOptions)
+  console.log('lllimit', limit)
   const sortItems: { [key: string]: SortOrder } = {}
   if (sortBy && sortOrder) {
     sortItems[sortBy] = sortOrder
