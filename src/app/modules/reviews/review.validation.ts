@@ -4,7 +4,7 @@ const addReviewZodSchema = z.object({
     title: z.string({ required_error: 'Title is required' }),
     author: z.string({ required_error: 'Author is required' }),
     body: z.string({ required_error: 'Body is required' }),
-    rating: z.number({ required_error: 'Rating is required' }),
+    rating: z.string({ required_error: 'Rating is required' }),
     book: z.string({
       required_error: 'Book is required',
     }),

@@ -4,7 +4,7 @@ import { IBook } from '../books/books.interface'
 export type IReview = {
   title: string
   body: string
-  rating: number
+  rating: string
   author: string
   book: Types.ObjectId | IBook
 }
