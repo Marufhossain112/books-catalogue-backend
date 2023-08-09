@@ -20,7 +20,7 @@ const moduleRoutes = [
     route: BooksRoutes,
   },
   {
-    path: '/api',
+    path: '/review-api',
     route: ReviewsRoutes,
   },
 ]
