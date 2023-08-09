@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.paginationHelpers = void 0;
 const calculatePagination = (option) => {
     const page = Number(option.page || 1);
-    const limit = Number(option.limit || 10);
+    const limit = Number(option.limit);
     const sortBy = option.sortBy || 'createdAt';
     const sortOrder = option.sortOrder || 'desc';
     const skip = (page - 1) * limit;

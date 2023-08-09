@@ -70,6 +70,7 @@ const getAllBooks = (filters, paginationOptions) => __awaiter(void 0, void 0, vo
         });
     }
     const { page, limit, skip, sortBy, sortOrder } = paginationHelpers_1.paginationHelpers.calculatePagination(paginationOptions);
+    console.log('lllimit', limit);
     const sortItems = {};
     if (sortBy && sortOrder) {
         sortItems[sortBy] = sortOrder;

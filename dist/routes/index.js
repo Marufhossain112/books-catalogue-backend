@@ -23,7 +23,7 @@ const moduleRoutes = [
         route: books_route_1.BooksRoutes,
     },
     {
-        path: '/api',
+        path: '/review-api',
         route: review_route_1.ReviewsRoutes,
     },
 ];

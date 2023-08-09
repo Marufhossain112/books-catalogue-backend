@@ -7,7 +7,7 @@ import auth from '../../middlewares/auth'
 const router = express.Router()
 router.get('/reviews/:id', ReviewController.getReview)
 router.post(
-  '/reviews',
+  '/add-review',
   auth,
   validateRequest(ReviewValidation.addReviewZodSchema),
   ReviewController.addReview,
