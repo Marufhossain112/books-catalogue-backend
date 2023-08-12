@@ -9,7 +9,7 @@ const createBooksZodSchema = z.object({
     }),
     imgUrl: z.string().optional(),
     reviews: z.string().array().optional(),
-    publisher: z.string().optional(),
+    publisherToken: z.string().optional(),
   }),
 })
 const updateBooksZodSchema = z.object({
@@ -24,7 +24,7 @@ const updateBooksZodSchema = z.object({
       .optional(),
     imgUrl: z.string().optional(),
     reviews: z.string().array().optional(),
-    publisher: z.string().optional(),
+    publisherToken: z.string().optional(),
   }),
 })
 

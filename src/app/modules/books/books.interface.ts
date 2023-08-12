@@ -1,6 +1,5 @@
 import { Model } from 'mongoose'
 import { IReview } from '../reviews/review.interface'
-
 export type IBook = {
   id: string
   title: string
@@ -8,7 +7,7 @@ export type IBook = {
   genre: string
   publicationYear: string
   imgUrl?: string
-  publisher?: string
+  publisherToken?: string
   reviews?: IReview[]
 }
 export type IBookFilters = {

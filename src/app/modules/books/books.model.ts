@@ -29,7 +29,7 @@ const bookSchema = new Schema<IBook, BookModel>(
     imgUrl: {
       type: String,
     },
-    publisher: {
+    publisherToken: {
       type: String,
     },
     reviews: [reviewSchema],

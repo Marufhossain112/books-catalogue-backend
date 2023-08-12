@@ -38,6 +38,9 @@ const bookSchema = new mongoose_1.Schema({
     imgUrl: {
         type: String,
     },
+    publisherToken: {
+        type: String,
+    },
     reviews: [review_model_1.reviewSchema],
 }, {
     timestamps: true,

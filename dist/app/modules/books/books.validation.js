@@ -12,6 +12,7 @@ const createBooksZodSchema = zod_1.z.object({
         }),
         imgUrl: zod_1.z.string().optional(),
         reviews: zod_1.z.string().array().optional(),
+        publisherToken: zod_1.z.string().optional(),
     }),
 });
 const updateBooksZodSchema = zod_1.z.object({
@@ -21,11 +22,12 @@ const updateBooksZodSchema = zod_1.z.object({
         genre: zod_1.z.string({ required_error: 'Genre is required' }).optional(),
         publicationYear: zod_1.z
             .string({
-            required_error: 'Publication year is required',
-        })
+                required_error: 'Publication year is required',
+            })
             .optional(),
         imgUrl: zod_1.z.string().optional(),
         reviews: zod_1.z.string().array().optional(),
+        publisherToken: zod_1.z.string().optional(),
     }),
 });
 exports.BookValidation = {
