@@ -28,7 +28,7 @@ const mongoose_1 = __importStar(require("mongoose"));
 // Review model
 exports.reviewSchema = new mongoose_1.default.Schema({
     title: { type: String, required: true },
-    rating: { type: Number, required: true },
+    rating: { type: String, required: true },
     body: { type: String, required: true },
     book: { type: mongoose_1.Schema.Types.ObjectId, ref: 'Book', required: true },
     author: { type: String, required: true },
